@@ -5,7 +5,7 @@ class DateHelper {
     }
 
     static textoParaData(texto) {
-        if(!/\d{4}-\d{2}-\d{2}/.test()) {
+        if(!/^\d{4}-\d{2}-\d{2}$/.test(texto)) { // d: dígito; D: qualquer coisa menos dígito; '^': começa com; $: termina com
             throw new Error("O formato da data deve ser yyyy-MM-dd");
         }
         
