@@ -12,15 +12,14 @@ class NegociacaoController {
 
         console.log(this._data.value);
 
-        let data = new Date(... // cada item do array será passado para cada parâmetro recebido pela função 
-            this._data.value
-                .split('-')
-                .map((item, indice) => {
-                    if(indice == 1) 
-                        return item - 1;    // O construtor de Date conta os meses a partir do 0
-                    return item;
-                })
+        let data = DateHelper.textoParaData(this._data.value);
+    
+        let negociacao = new Negociacao(
+            data, 
+            this._quantidade.value,
+            this._valor.value
         );
-        console.log(data);
+        console.log(negociacao.data);
+        console.log(DateHelper.dataParaTexto(data));
     }
 }
