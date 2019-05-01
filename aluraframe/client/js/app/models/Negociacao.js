@@ -1,5 +1,4 @@
 class Negociacao {
-
     constructor(data, quantidade, valor) {
         this._data = new Date(data.getTime()); // programação defensiva
         this._quantidade = quantidade;
