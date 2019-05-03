@@ -37,7 +37,7 @@
         <button class="btn btn-primary text-center" type="button">
             Importar Negociações
         </button>
-        <button class="btn btn-primary text-center" type="button">
+        <button onclick="negociacaoController.esvazia()" class="btn btn-primary text-center" type="button">
             Apagar
         </button>
     </div> 
@@ -56,6 +56,30 @@
     <script src="js/app/views/MensagemView.js"></script>
     <script>
         let negociacaoController = new NegociacaoController();
+        
+        class Funcionario {
+            constructor(email) {
+                this._email = email;
+            }
+
+            get email() {
+                return this._email;
+            }
+
+            set email(email) {
+                this._email = email;
+            }
+        }
+
+        let funcionario = new Proxy(new Funcionario("victor@hotmail.com"), {
+            set(target, prop, value, receiver) {
+                console.log(`a prop chamada foi ${prop}`);
+                console.log(`valor antigo: ${target[prop]}, valor novo: ${value}`);
+                return Reflect.set(target, prop, value, receiver);
+            }
+        });
+
+        funcionario.email = "victorgalves2@hotmail.com";
     </script>
 </body>
 </html>
