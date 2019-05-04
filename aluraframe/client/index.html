@@ -55,36 +55,9 @@
     <script src="js/app/views/NegociacoesView.js"></script>
     <script src="js/app/views/MensagemView.js"></script>
     <script src="js/app/services/ProxyFactory.js"></script>
+    <script src="js/app/helpers/Bind.js"></script>
     <script>
         let negociacaoController = new NegociacaoController();
-        /* 
-        
-        EXEMPLO DE PROXY COM SET
-
-        class Funcionario {
-            constructor(email) {
-                this._email = email;
-            }
-
-            get email() {
-                return this._email;
-            }
-
-            set email(email) {
-                this._email = email;
-            }
-        }
-
-        let funcionario = new Proxy(new Funcionario("victor@hotmail.com"), {
-            set(target, prop, value, receiver) {
-                console.log(`a prop chamada foi ${prop}`);
-                console.log(`valor antigo: ${target[prop]}, valor novo: ${value}`);
-                return Reflect.set(target, prop, value, receiver);
-            }
-        });
-
-        funcionario.email = "victorgalves2@hotmail.com";
-        */
     </script>
 </body>
 </html>

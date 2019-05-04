@@ -7,15 +7,10 @@ class NegociacaoController {
         this._inputQuantidade = $("#quantidade");
         this._inputValor = $("#valor");
        
-        this._listaNegociacoes = ProxyFactory
-            .create(new ListaNegociacoes(), ["adiciona", "esvazia"], model => this._negociacoesView.update(model)); // cria um proxy (objeto idêntico) para colocar as traps     
-        this._negociacoesView = new NegociacoesView($('#tabela'));
-        this._negociacoesView.update(this._listaNegociacoes);
+        this._listaNegociacoes = new Bind(new ListaNegociacoes(),  new NegociacoesView($('#tabela')) , "adiciona", "esvazia"); 
+        // cria uma class bind que chama um proxy
        
-        this._mensagem = ProxyFactory
-            .create(new Mensagem(), ["texto"], model => this._mensagemView.update(model));
-        this._mensagemView = new MensagemView($("#mensagemView"));
-        this._mensagemView.update(this._mensagem);
+        this._mensagem = new Bind(new Mensagem(), new MensagemView($("#mensagemView")), "texto");
     }
 
     adiciona(event) {
