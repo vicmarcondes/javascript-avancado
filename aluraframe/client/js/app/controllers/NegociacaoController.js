@@ -2,7 +2,6 @@ class NegociacaoController {
 
     constructor() {        
         let $ = document.querySelector.bind(document); // bind: manter o contexto do 'this' que aponta para o document
-        let self = this; // guarda a instância do controller
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
@@ -26,32 +25,18 @@ class NegociacaoController {
     }
 
     importaNegociacoes() {
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'negociacoes/semana');
-
-        xhr.send();
-
-        /*
-                0: requisição ainda não iniciada
-
-                1: conexão com o servidor estabelecida
-                
-                2: requisição recebida
-                
-                3: processando requisição
-                
-                4: requisição está concluída e a resposta está pronta
-        */
-
-        xhr.onreadystatechange = () => {
-            if(xhr.readyState == 4) {                           
-                if(xhr.status == 200) {
-                    console.log('Buscando os dados...');
-                } else {
-                    console.log('Erro ao buscar os dados');
-                }
-            }
-        }
+        let service = new NegociacaoService();
+        
+        Promise.all([
+            service.obterNegociacoesDaSemana(),
+            service.obterNegociacoesDaSemanaAnterior(),
+            service.obterNegociacoesDaSemanaRetrasada()
+        ])
+        .then(negociacoes => { // negociacoes retorna 3 arrays; 1 de cada semana
+            negociacoes
+                .reduce((arrayAchatado, array) => arrayAchatado.concat(array),[]) // concatena os 3 arrays em um 
+                .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+        })
     }
 
     _limpaFormulario() {
