@@ -1,7 +1,7 @@
 class NegociacoesView extends View {
 
     template(model) {
-        return  `<table class="table table-hover table-bordered">
+        return  `<table class='table table-hover table-bordered'>
             <thead>
                 <tr>
                     <th>DATA</th>
@@ -21,7 +21,7 @@ class NegociacoesView extends View {
                 `).join('')}
             </tbody>            
             <tfoot>
-                <td colspan="3"></td>
+                <td colspan='3'></td>
                 <td>${model.totalVolume}</td>
             </tfoot>
         </table>   
